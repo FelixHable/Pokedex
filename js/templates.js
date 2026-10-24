@@ -1,94 +1,89 @@
 /**
- * Help function: Returns HTML code
- * @param {Array} array The array with the Pokémon
- * @param {number} i The current Pokémon
- * @returns HTML-Code
+ * Renders individual Pokémon Card with dynamic type-based background
  */
 function generatePokedexCardHTML(array, i) {
+    const primaryType = getPokemonType(array, i, 0);
+    const typeColor = getPokemonTypeHexColor(primaryType);
+
     return `
-            <div class="pokedex-card" onclick="showPokemonDetails(${getArrayNameAsString(array)}, ${i})"> 
-                <div class="pokedex-card-header">
-                    <span class="pokemon-id">#${getPokemonID(array, i)}</span>
-                    <img src="${getPokemonImg(array, i)}" alt="No Image found!" class="pokemon-img">
-                </div>
-                <div class="pokedex-card-body">
-                    <span class="pokemon-name">${getPokemonName(array, i)}</span>
-                    <br>
-                    <div class="pokemon-types">
-                        <span class="pokemon-type" style="background-color: ${getPokemonTypeHexColor(getPokemonType(array, i, 0))}">${capitalize(getPokemonType(array, i, 0))}</span>
-                        <span class="pokemon-type ${getPokemonType(array, i, 1)}" style="background-color: ${getPokemonTypeHexColor(getPokemonType(array, i, 1))}">${capitalize(getPokemonType(array, i, 1))}</span>
-                    </div>
+        <div class="pokedex-card" onclick="showPokemonDetails(${getArrayNameAsString(array)}, ${i})"> 
+            <div class="pokedex-card-header" style="background: linear-gradient(135deg, ${typeColor}aa 0%, ${typeColor}cc 100%);">
+                <span class="pokemon-id">#${getPokemonID(array, i)}</span>
+                <img src="${getPokemonImg(array, i)}" alt="${getPokemonName(array, i)}" class="pokemon-img">
+            </div>
+            <div class="pokedex-card-body">
+                <span class="pokemon-name">${getPokemonName(array, i)}</span>
+                <div class="pokemon-types">
+                    <span class="pokemon-type" style="background-color: ${typeColor}">${capitalize(primaryType)}</span>
+                    <span class="pokemon-type ${getPokemonType(array, i, 1)}" style="background-color: ${getPokemonTypeHexColor(getPokemonType(array, i, 1))}">${capitalize(getPokemonType(array, i, 1))}</span>
                 </div>
             </div>
-        `;
+        </div>
+    `;
 }
 
 /**
- * Help function: Returns HTML code
- * @param {Array} array The array with the Pokémon
- * @param {number} i The current Pokémon
- * @returns HTML-Code
+ * Renders Pokémon details modal card with dynamic type-based background
  */
 function generatePokemonDetailsCardHTML(array, i) {
+    const primaryType = getPokemonType(array, i, 0);
+    const typeColor = getPokemonTypeHexColor(primaryType);
+
     return `
         <div class="pokemon-details-card" onclick="event.stopPropagation()">
-        <button id="next-pokemon-left-btn" class="nav-btn nav-btn-left btn" onclick="nextPokemonLeft(${getArrayNameAsString(array)}, ${i})"><img src="./assets/img/icons/arrow_left.svg" alt="Arrow Left" title="Left!"></button>
-            <div class="pokemon-details-header">
-                <button onclick="closePokemonDetails()" class="close-details-btn btn" title="Close!">
+            <button id="next-pokemon-left-btn" class="nav-btn nav-btn-left btn" onclick="nextPokemonLeft(${getArrayNameAsString(array)}, ${i})">
+                <img src="./assets/img/icons/arrow_left.svg" alt="Left">
+            </button>
+            <div class="pokemon-details-header" style="background: linear-gradient(135deg, ${typeColor}bb 0%, ${typeColor}ee 100%);">
+                <button onclick="closePokemonDetails()" class="close-details-btn btn" title="Close">
                     <img src="./assets/img/icons/close.svg" alt="Close">
                 </button>
-                <img src="${getPokemonImg(array, i)}" alt="No Image found!" class="pokemon-img pokemon-details-img">
+                <img src="${getPokemonImg(array, i)}" alt="${getPokemonName(array, i)}" class="pokemon-img pokemon-details-img">
             </div>
             <div class="pokemon-details-body">
                 <div class="pokemon-name-container">
                     <span class="pokemon-name pokemon-details-name">${getPokemonName(array, i)}</span>
                     <span class="pokemon-details-id">#${getPokemonID(array, i)}</span>
-                    <button class="favorite-btn btn" title="Save me!" onclick="setFavoritePokemon(${getArrayNameAsString(array)}, ${i}, ${getPokemonID(array, i)})">
+                    <button class="favorite-btn btn" title="Save" onclick="setFavoritePokemon(${getArrayNameAsString(array)}, ${i}, ${getPokemonID(array, i)})">
                         <img src="${getPokemonFavoriteState(array, i)}" alt="Favorite" id="fav-icon-pokemon-index-${i}">
                     </button>
                 </div>
                 <div class="pokemon-stats">
                     <div class="pokemon-stat">
-                        <span class="pokemon-properties pokemon-stat-description">HP</span>
+                        <span class="pokemon-stat-description">HP</span>
                         <div class="progress">
-                            <div class="progress-bar pokemon-stat-hp" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 0)}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 0)}</div>
+                            <div class="progress-bar pokemon-stat-hp" style="width: ${getPokemonStatPercent(array, i, 0)}%">${getPokemonStat(array, i, 0)}</div>
                         </div>
-                        <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
-                        <span class="pokemon-properties pokemon-stat-description">ATK</span>
+                        <span class="pokemon-stat-description">ATK</span>
                         <div class="progress">
-                            <div class="progress-bar pokemon-stat-atk" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 1)}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 1)}</div>
+                            <div class="progress-bar pokemon-stat-atk" style="width: ${getPokemonStatPercent(array, i, 1)}%">${getPokemonStat(array, i, 1)}</div>
                         </div>
-                        <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
-                        <span class="pokemon-properties pokemon-stat-description">DEF</span>
+                        <span class="pokemon-stat-description">DEF</span>
                         <div class="progress">
-                            <div class="progress-bar pokemon-stat-def" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 2)}%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 2)}</div>
+                            <div class="progress-bar pokemon-stat-def" style="width: ${getPokemonStatPercent(array, i, 2)}%">${getPokemonStat(array, i, 2)}</div>
                         </div>
-                        <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
-                        <span class="pokemon-properties pokemon-stat-description">S-ATK</span>
+                        <span class="pokemon-stat-description">S-ATK</span>
                         <div class="progress">
-                            <div class="progress-bar pokemon-stat-s-atk" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 3)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 3)}</div>
+                            <div class="progress-bar pokemon-stat-s-atk" style="width: ${getPokemonStatPercent(array, i, 3)}%">${getPokemonStat(array, i, 3)}</div>
                         </div>
-                        <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
-                        <span class="pokemon-properties pokemon-stat-description">S-DEF</span>
+                        <span class="pokemon-stat-description">S-DEF</span>
                         <div class="progress">
-                            <div class="progress-bar pokemon-stat-s-def" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 4)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 4)}</div>
+                            <div class="progress-bar pokemon-stat-s-def" style="width: ${getPokemonStatPercent(array, i, 4)}%">${getPokemonStat(array, i, 4)}</div>
                         </div>
-                        <span class="pokemon-properties">255</span>
                     </div>
                     <div class="pokemon-stat">
-                        <span class="pokemon-properties pokemon-stat-description">SPEED</span>
+                        <span class="pokemon-stat-description">SPEED</span>
                         <div class="progress">
-                            <div class="progress-bar pokemon-stat-speed" role="progressbar" style="width: ${getPokemonStatPercent(array, i, 5)}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">${getPokemonStat(array, i, 5)}</div>
+                            <div class="progress-bar pokemon-stat-speed" style="width: ${getPokemonStatPercent(array, i, 5)}%">${getPokemonStat(array, i, 5)}</div>
                         </div>
-                        <span class="pokemon-properties">255</span>
                     </div>
                 </div>
             </div>
@@ -98,27 +93,28 @@ function generatePokemonDetailsCardHTML(array, i) {
                     <span class="pokemon-properties-description">Weight: </span><span class="pokemon-properties">${getPokemonProperties(array, i, 'weight') / 10}kg</span>
                 </div>
                 <div>
-                    <span class="pokemon-properties-description">Abilities:</span>
+                    <span class="pokemon-properties-description">Abilities: </span>
                     <span class="pokemon-properties">${getPokemonAbilities(array, i, 0)}</span>
                     <span class="pokemon-properties ${getPokemonAbilities(array, i, 1)}">/ ${getPokemonAbilities(array, i, 1)}</span>
                     <span class="pokemon-properties ${getPokemonAbilities(array, i, 2)}">/ ${getPokemonAbilities(array, i, 2)}</span>
                 </div>
             </div>
-            <button id="next-pokemon-right-btn" class="nav-btn nav-btn-right btn" onclick="nextPokemonRight(${getArrayNameAsString(array)}, ${i})"><img src="./assets/img/icons/arrow_right.svg" alt="Arrow Right" title="Right!"></button>
+            <button id="next-pokemon-right-btn" class="nav-btn nav-btn-right btn" onclick="nextPokemonRight(${getArrayNameAsString(array)}, ${i})">
+                <img src="./assets/img/icons/arrow_right.svg" alt="Right">
+            </button>
         </div>
     `;
 }
 
 /**
- * Help function: Returns HTML code
- * @returns HTML-Code
+ * Empty display state
  */
 function generateEmptyHTML() {
     return `
         <div class="empty-container">
             <span class="empty-text">Uh Oh...</span>
-            <img src="./assets/img/psyduck.png" ald="Empty" class="empty-img">
-            <span class="empty-text">Nothing to see here :(</span>
+            <img src="./assets/img/psyduck.png" alt="Empty state" class="empty-img">
+            <span class="empty-text">No Pokémon found!</span>
         </div>
     `;
 }

@@ -3,57 +3,59 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokédex</title>
     <link rel="icon" type="image/x-icon" href="./assets/img/pokeball.svg">
-    <!-- Import Google Fonts START -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="./style.css">
-    <!-- Import Google Fonts END -->
     <script src="./js/templates.js"></script>
     <script src="./js/autocomplete.js"></script>
     <script src="./js/script.js"></script>
 </head>
 
 <body onload="init()">
-    <header class="border-spacing" id="header">
+    <header id="header">
         <div class="header-banner">
             <h1 class="headline">Pokédex</h1>
             <nav>
                 <form autocomplete="off" class="search-bar" onsubmit="filterPokemon(); return false">
-                    <button class="search-btn btn" onclick="" title="Find me!" type="submit">
-                    <img src="./assets/img/pokeball.svg" alt="Pokéball">
-                </button>
-                    <input type="text" id="search-input" class="search-input" placeholder="Search by Name" min="3" required>
+                    <button class="search-btn btn" type="submit" title="Find me!">
+                        <img src="./assets/img/pokeball.svg" alt="Pokéball">
+                    </button>
+                    <input type="text" id="search-input" class="search-input" placeholder="Search Pokémon..." minlength="3" required>
                 </form>
-                <div>
+                <div class="nav-actions">
                     <button class="home-btn btn" onclick="home()" title="Home">
-                    <img src="./assets/img/icons/home.svg" alt="Favorites">
-                </button>
+                        <img src="./assets/img/icons/home.svg" alt="Home">
+                    </button>
                     <button class="show-favorites-btn btn" onclick="showFavoritePokemon()" title="Favorites">
-                    <img src="./assets/img/icons/favorite_saved.svg" alt="Favorites">
-                </button>
+                        <img src="./assets/img/icons/favorite_saved.svg" alt="Favorites">
+                    </button>
                 </div>
             </nav>
-            <div class="credits hide-mobile"><a href="https://pokeapi.co/">https://pokeapi.co/</a></div>
         </div>
     </header>
+
     <div id="pokemon-details-container" class="pokemon-details-container d-none" onclick="closePokemonDetails()">
-        <!-- Pokemon details are rendered here -->
+        <!-- Pokemon details rendered here -->
     </div>
-    <div id="pokedex-render-container" class="pokedex-render-container border-spacing">
-        <!-- Pokemon are rendered here -->
-    </div>
+
+    <main id="pokedex-render-container" class="pokedex-render-container">
+        <!-- Pokemon rendered here -->
+    </main>
+
     <div class="loading-screen d-none" id="loading-screen">
-        <h2 class="loading-screen-headline">Catching Pokèmon</h2>
+        <h2 class="loading-screen-headline">Catching Pokémon...</h2>
         <img src="./assets/img/pokeball.svg" alt="Pokéball Loader" class="pokeball-loader">
-        <h3 class="loading-screen-text">Please wait...</h3>
+        <h3 class="loading-screen-text">Please wait</h3>
     </div>
-    <button type="button" class="btn btn-up d-none" id="btn-up" onclick="scrollToTop()"><img src="./assets/img/icons/pokeball_up.svg" alt="Up Button"></button>
+
+    <button type="button" class="btn btn-up d-none" id="btn-up" onclick="scrollToTop()">
+        <img src="./assets/img/icons/pokeball_up.svg" alt="Up Button">
+    </button>
 </body>
 
 </html>
