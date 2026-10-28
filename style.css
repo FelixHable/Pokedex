@@ -150,7 +150,33 @@ nav {
     gap: 1.5rem;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2.5rem 1.5rem;
+    padding: 2.5rem 1.5rem 1rem 1.5rem;
+}
+
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 0 4rem 0;
+}
+
+.load-more-btn {
+    background: var(--accent-blue);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 99px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(58, 130, 246, 0.4);
+    transition: all 0.2s ease;
+}
+
+.load-more-btn:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(58, 130, 246, 0.6);
 }
 
 .pokedex-card {
@@ -255,6 +281,7 @@ nav {
     border-radius: 24px;
     padding: 2rem 1.5rem;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
 }
 
 .pokemon-details-header {
@@ -272,6 +299,7 @@ nav {
     position: absolute;
     top: 10px;
     right: 10px;
+    z-index: 10;
 }
 
 .close-details-btn img,
@@ -380,24 +408,28 @@ nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(4px);
     border-radius: 50%;
-    padding: 0.5rem;
+    padding: 0.6rem;
     border: 1px solid var(--card-border);
+    z-index: 10;
 }
 
 .nav-btn:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .nav-btn img {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
     filter: brightness(0) invert(1);
+    display: block;
 }
 
-.nav-btn-left { left: -18px; }
-.nav-btn-right { right: -18px; }
+.nav-btn-left { left: 12px; }
+.nav-btn-right { right: 12px; }
 
 .empty-container {
     grid-column: 1 / -1;
@@ -492,6 +524,6 @@ nav {
 
 @media (max-width: 600px) {
     .headline { font-size: 2.5rem; }
-    .nav-btn-left { left: 5px; }
-    .nav-btn-right { right: 5px; }
+    .nav-btn-left { left: 8px; }
+    .nav-btn-right { right: 8px; }
 }

@@ -66,6 +66,7 @@ async function getPokemonForPagination(responseJSON) {
 async function filterPokemon() {
     searchedPokemon = [];
     userIsOnHome = false;
+    document.getElementById('load-more-container').classList.add('d-none');
 
     let searchText = document.getElementById('search-input').value.toLowerCase().trim();
     document.getElementById('search-input').value = '';
@@ -100,7 +101,7 @@ function hideLoadingScreen() {
 }
 
 function loadMorePokemon() {
-    if (userIsOnHome) {
+    if (userIsOnHome && !pokemonLoading) {
         offset += limit;
         loadPokemonPagination();
     }
@@ -197,11 +198,13 @@ function getSavedPokemonIndex(pokemonID) {
 function home() {
     userIsOnHome = true;
     searchedPokemon = [];
+    document.getElementById('load-more-container').classList.remove('d-none');
     renderPokemon(loadedPokemon);
 }
 
 function showFavoritePokemon() {
     userIsOnHome = false;
+    document.getElementById('load-more-container').classList.add('d-none');
     if (favoritePokemon.length > 0) {
         renderPokemon(favoritePokemon);
     } else {
@@ -227,12 +230,6 @@ function capitalizeFirstLetter(str) {
 function capitalizeAfterHyphen(str) {
     return str ? str.replace(/-([a-z])/g, (_, char) => '-' + char.toUpperCase()) : '';
 }
-
-window.addEventListener('scroll', function() {
-    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 100 && !pokemonLoading) {
-        loadMorePokemon();
-    }
-});
 
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closePokemonDetails();
