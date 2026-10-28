@@ -104,7 +104,6 @@ function generateEmptyHTML() {
     return `
         <div class="empty-container">
             <span class="empty-text">Ups...</span>
-            <img src="./assets/img/psyduck.png" alt="Keine Ergebnisse" class="empty-img">
             <span class="empty-text">Keine Pokémon gefunden!</span>
         </div>
     `;
