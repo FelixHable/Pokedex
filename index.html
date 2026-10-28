@@ -21,17 +21,17 @@
             <h1 class="headline">Pokédex</h1>
             <nav>
                 <form autocomplete="off" class="search-bar" onsubmit="filterPokemon(); return false">
-                    <button class="search-btn btn" type="submit" title="Suchen">
-                        <img src="icons/arrowright.png" alt="Suche">
+                    <button class="search-btn btn" type="submit" title="Search">
+                        <img src="icons/arrowright.png" alt="Search">
                     </button>
-                    <input type="text" id="search-input" class="search-input" placeholder="Pokémon suchen..." minlength="3" required>
+                    <input type="text" id="search-input" class="search-input" placeholder="Search Pokémon..." minlength="3" required>
                 </form>
                 <div class="nav-actions">
-                    <button class="home-btn btn" onclick="home()" title="Startseite">
+                    <button class="home-btn btn" onclick="home()" title="Home">
                         <img src="icons/home.png" alt="Home">
                     </button>
-                    <button class="show-favorites-btn btn" onclick="showFavoritePokemon()" title="Favoriten">
-                        <img src="icons/favorit.png" alt="Favoriten">
+                    <button class="show-favorites-btn btn" onclick="showFavoritePokemon()" title="Favorites">
+                        <img src="icons/favorit.png" alt="Favorites">
                     </button>
                 </div>
             </nav>
@@ -44,9 +44,9 @@
 
     <div class="loading-screen d-none" id="loading-screen">
         <div class="loading-card">
-            <img src="icons/arrowdown.png" alt="Laden" class="loader-icon">
-            <h2 class="loading-screen-headline">Pokémon werden geladen</h2>
-            <p class="loading-screen-text">Bitte einen Moment Geduld...</p>
+            <img src="icons/arrowdown.png" alt="Loading" class="loader-icon">
+            <h2 class="loading-screen-headline">Catching Pokémon...</h2>
+            <p class="loading-screen-text">Please wait a moment...</p>
         </div>
     </div>
 </body>

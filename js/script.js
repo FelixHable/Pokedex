@@ -1,7 +1,7 @@
 'use strict';
 
 let offset = 0;
-let limit = 25;
+let limit = 10;
 let pokemonLoading = false;
 
 let numberOfAllPokemon = 1126;

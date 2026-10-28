@@ -278,6 +278,7 @@ nav {
 .favorite-btn img {
     width: 24px;
     height: 24px;
+    object-fit: contain;
     filter: brightness(0) invert(1);
 }
 
@@ -403,19 +404,15 @@ nav {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 3rem 0;
-    gap: 1rem;
+    justify-content: center;
+    padding: 5rem 0;
+    gap: 0.5rem;
 }
 
 .empty-text {
     font-size: 1.5rem;
     color: var(--text-muted);
     font-weight: 600;
-}
-
-.empty-img {
-    width: 200px;
-    opacity: 0.8;
 }
 
 .loading-screen {
