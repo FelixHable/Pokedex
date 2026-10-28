@@ -1,6 +1,3 @@
-/**
- * Autocomplete component
- */
 function autocomplete(inp, arr) {
     let currentFocus;
 
@@ -35,13 +32,13 @@ function autocomplete(inp, arr) {
         let x = document.getElementById(this.id + "autocomplete-list");
         if (x) x = x.getElementsByTagName("div");
 
-        if (e.keyCode == 40) { // Down
+        if (e.keyCode == 40) {
             currentFocus++;
             addActive(x);
-        } else if (e.keyCode == 38) { // Up
+        } else if (e.keyCode == 38) {
             currentFocus--;
             addActive(x);
-        } else if (e.keyCode == 13) { // Enter
+        } else if (e.keyCode == 13) {
             if (currentFocus > -1 && x) {
                 e.preventDefault();
                 x[currentFocus].click();

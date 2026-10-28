@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokédex</title>
-    <link rel="icon" type="image/x-icon" href="./assets/img/pokeball.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -22,40 +21,34 @@
             <h1 class="headline">Pokédex</h1>
             <nav>
                 <form autocomplete="off" class="search-bar" onsubmit="filterPokemon(); return false">
-                    <button class="search-btn btn" type="submit" title="Find me!">
-                        <img src="./assets/img/pokeball.svg" alt="Pokéball">
+                    <button class="search-btn btn" type="submit" title="Suchen">
+                        <img src="icons/arrowright.png" alt="Suche">
                     </button>
-                    <input type="text" id="search-input" class="search-input" placeholder="Search Pokémon..." minlength="3" required>
+                    <input type="text" id="search-input" class="search-input" placeholder="Pokémon suchen..." minlength="3" required>
                 </form>
                 <div class="nav-actions">
-                    <button class="home-btn btn" onclick="home()" title="Home">
-                        <img src="./assets/img/icons/home.svg" alt="Home">
+                    <button class="home-btn btn" onclick="home()" title="Startseite">
+                        <img src="icons/home.png" alt="Home">
                     </button>
-                    <button class="show-favorites-btn btn" onclick="showFavoritePokemon()" title="Favorites">
-                        <img src="./assets/img/icons/favorite_saved.svg" alt="Favorites">
+                    <button class="show-favorites-btn btn" onclick="showFavoritePokemon()" title="Favoriten">
+                        <img src="icons/favorit.png" alt="Favoriten">
                     </button>
                 </div>
             </nav>
         </div>
     </header>
 
-    <div id="pokemon-details-container" class="pokemon-details-container d-none" onclick="closePokemonDetails()">
-        <!-- Pokemon details rendered here -->
-    </div>
+    <div id="pokemon-details-container" class="pokemon-details-container d-none" onclick="closePokemonDetails()"></div>
 
-    <main id="pokedex-render-container" class="pokedex-render-container">
-        <!-- Pokemon rendered here -->
-    </main>
+    <main id="pokedex-render-container" class="pokedex-render-container"></main>
 
     <div class="loading-screen d-none" id="loading-screen">
-        <h2 class="loading-screen-headline">Catching Pokémon...</h2>
-        <img src="./assets/img/pokeball.svg" alt="Pokéball Loader" class="pokeball-loader">
-        <h3 class="loading-screen-text">Please wait</h3>
+        <div class="loading-card">
+            <img src="icons/arrowdown.png" alt="Laden" class="loader-icon">
+            <h2 class="loading-screen-headline">Pokémon werden geladen</h2>
+            <p class="loading-screen-text">Bitte einen Moment Geduld...</p>
+        </div>
     </div>
-
-    <button type="button" class="btn btn-up d-none" id="btn-up" onclick="scrollToTop()">
-        <img src="./assets/img/icons/pokeball_up.svg" alt="Up Button">
-    </button>
 </body>
 
 </html>

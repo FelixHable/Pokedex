@@ -1,6 +1,3 @@
-/**
- * Renders individual Pokémon Card with dynamic type-based background
- */
 function generatePokedexCardHTML(array, i) {
     const primaryType = getPokemonType(array, i, 0);
     const typeColor = getPokemonTypeHexColor(primaryType);
@@ -22,21 +19,18 @@ function generatePokedexCardHTML(array, i) {
     `;
 }
 
-/**
- * Renders Pokémon details modal card with dynamic type-based background
- */
 function generatePokemonDetailsCardHTML(array, i) {
     const primaryType = getPokemonType(array, i, 0);
     const typeColor = getPokemonTypeHexColor(primaryType);
 
     return `
         <div class="pokemon-details-card" onclick="event.stopPropagation()">
-            <button id="next-pokemon-left-btn" class="nav-btn nav-btn-left btn" onclick="nextPokemonLeft(${getArrayNameAsString(array)}, ${i})">
-                <img src="./assets/img/icons/arrow_left.svg" alt="Left">
+            <button id="next-pokemon-left-btn" class="nav-btn nav-btn-left btn" onclick="nextPokemonLeft(${getArrayNameAsString(array)}, ${i})" title="Vorheriges Pokémon">
+                <img src="icons/arrowleft.png" alt="Links">
             </button>
             <div class="pokemon-details-header" style="background: linear-gradient(135deg, ${typeColor}bb 0%, ${typeColor}ee 100%);">
-                <button onclick="closePokemonDetails()" class="close-details-btn btn" title="Close">
-                    <img src="./assets/img/icons/close.svg" alt="Close">
+                <button onclick="closePokemonDetails()" class="close-details-btn btn" title="Schließen">
+                    <img src="icons/close.png" alt="Schließen">
                 </button>
                 <img src="${getPokemonImg(array, i)}" alt="${getPokemonName(array, i)}" class="pokemon-img pokemon-details-img">
             </div>
@@ -44,8 +38,8 @@ function generatePokemonDetailsCardHTML(array, i) {
                 <div class="pokemon-name-container">
                     <span class="pokemon-name pokemon-details-name">${getPokemonName(array, i)}</span>
                     <span class="pokemon-details-id">#${getPokemonID(array, i)}</span>
-                    <button class="favorite-btn btn" title="Save" onclick="setFavoritePokemon(${getArrayNameAsString(array)}, ${i}, ${getPokemonID(array, i)})">
-                        <img src="${getPokemonFavoriteState(array, i)}" alt="Favorite" id="fav-icon-pokemon-index-${i}">
+                    <button class="favorite-btn btn" title="Als Favorit speichern" onclick="setFavoritePokemon(${getArrayNameAsString(array)}, ${i}, ${getPokemonID(array, i)})">
+                        <img src="${getPokemonFavoriteState(array, i)}" alt="Favorit" id="fav-icon-pokemon-index-${i}">
                     </button>
                 </div>
                 <div class="pokemon-stats">
@@ -89,32 +83,29 @@ function generatePokemonDetailsCardHTML(array, i) {
             </div>
             <div class="pokemon-details-footer">
                 <div>
-                    <span class="pokemon-properties-description">Height: </span><span class="pokemon-properties">${getPokemonProperties(array, i, 'height') / 10}m</span>
-                    <span class="pokemon-properties-description">Weight: </span><span class="pokemon-properties">${getPokemonProperties(array, i, 'weight') / 10}kg</span>
+                    <span class="pokemon-properties-description">Größe: </span><span class="pokemon-properties">${getPokemonProperties(array, i, 'height') / 10}m</span>
+                    <span class="pokemon-properties-description">Gewicht: </span><span class="pokemon-properties">${getPokemonProperties(array, i, 'weight') / 10}kg</span>
                 </div>
                 <div>
-                    <span class="pokemon-properties-description">Abilities: </span>
+                    <span class="pokemon-properties-description">Fähigkeiten: </span>
                     <span class="pokemon-properties">${getPokemonAbilities(array, i, 0)}</span>
                     <span class="pokemon-properties ${getPokemonAbilities(array, i, 1)}">/ ${getPokemonAbilities(array, i, 1)}</span>
                     <span class="pokemon-properties ${getPokemonAbilities(array, i, 2)}">/ ${getPokemonAbilities(array, i, 2)}</span>
                 </div>
             </div>
-            <button id="next-pokemon-right-btn" class="nav-btn nav-btn-right btn" onclick="nextPokemonRight(${getArrayNameAsString(array)}, ${i})">
-                <img src="./assets/img/icons/arrow_right.svg" alt="Right">
+            <button id="next-pokemon-right-btn" class="nav-btn nav-btn-right btn" onclick="nextPokemonRight(${getArrayNameAsString(array)}, ${i})" title="Nächstes Pokémon">
+                <img src="icons/arrowright.png" alt="Rechts">
             </button>
         </div>
     `;
 }
 
-/**
- * Empty display state
- */
 function generateEmptyHTML() {
     return `
         <div class="empty-container">
-            <span class="empty-text">Uh Oh...</span>
-            <img src="./assets/img/psyduck.png" alt="Empty state" class="empty-img">
-            <span class="empty-text">No Pokémon found!</span>
+            <span class="empty-text">Ups...</span>
+            <img src="./assets/img/psyduck.png" alt="Keine Ergebnisse" class="empty-img">
+            <span class="empty-text">Keine Pokémon gefunden!</span>
         </div>
     `;
 }

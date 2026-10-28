@@ -1,6 +1,5 @@
 'use strict';
 
-// Global Scope
 let offset = 0;
 let limit = 25;
 let pokemonLoading = false;
@@ -33,7 +32,7 @@ async function loadAllPokemonNamesAndUrl() {
         const responseJSON = await response.json();
         allPokemonNamesAndUrl = responseJSON.results || [];
     } catch (error) {
-        console.error('Failed to load Pokémon list:', error);
+        console.error(error);
     }
 }
 
@@ -47,7 +46,7 @@ async function loadPokemonPagination() {
         const responseJSON = await response.json();
         await getPokemonForPagination(responseJSON);
     } catch (error) {
-        console.error('Error fetching pagination data:', error);
+        console.error(error);
     } finally {
         hideLoadingScreen();
         pokemonLoading = false;
@@ -133,7 +132,6 @@ function renderPokemon(array) {
 function showPokemonDetails(array, index) {
     pokemonDetailsOpen = true;
     document.body.style.overflow = 'hidden';
-    document.getElementById('btn-up').classList.add('d-none');
 
     let container = document.getElementById('pokemon-details-container');
     container.classList.remove('d-none');
@@ -161,10 +159,6 @@ function closePokemonDetails() {
     container.classList.add('d-none');
     container.innerHTML = '';
     document.body.style.overflow = 'auto';
-
-    if (upBtnVisible()) {
-        document.getElementById('btn-up').classList.remove('d-none');
-    }
 }
 
 function setFavoritePokemon(array, index, pokemonID) {
@@ -175,7 +169,7 @@ function setFavoritePokemon(array, index, pokemonID) {
     array[index]['favorite'] = !array[index]['favorite'];
 
     if (array[index]['favorite']) {
-        document.getElementById(`fav-icon-pokemon-index-${index}`).src = './assets/img/icons/favorite_saved.svg';
+        document.getElementById(`fav-icon-pokemon-index-${index}`).src = 'icons/favorit.png';
         favoritePokemon.push(array[index]);
     } else {
         const favIndex = getSavedPokemonIndex(pokemonID);
@@ -238,12 +232,6 @@ window.addEventListener('scroll', function() {
     if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 100 && !pokemonLoading) {
         loadMorePokemon();
     }
-
-    if (upBtnVisible() && !pokemonLoading) {
-        document.getElementById('btn-up').classList.remove('d-none');
-    } else {
-        document.getElementById('btn-up').classList.add('d-none');
-    }
 });
 
 window.addEventListener('keydown', (e) => {
@@ -258,15 +246,6 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
-function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function upBtnVisible() {
-    return window.pageYOffset >= 100 && !pokemonDetailsOpen;
-}
-
-// Touch Handling
 document.addEventListener('touchstart', (evt) => {
     xDown = evt.touches[0].clientX;
     yDown = evt.touches[0].clientY;
@@ -292,7 +271,6 @@ document.addEventListener('touchmove', (evt) => {
     yDown = null;
 }, false);
 
-// Pokémon Data Helpers
 function getPokemonProperties(array, index, property) {
     return array[index][property];
 }
@@ -307,7 +285,7 @@ function getPokemonName(array, index) {
 }
 
 function getPokemonImg(array, index) {
-    return array[index]['sprites']['other']['official-artwork']['front_default'] || './assets/img/no_image.svg';
+    return array[index]['sprites']['other']['official-artwork']['front_default'] || 'icons/close.png';
 }
 
 function getPokemonType(array, index, typeIndex) {
@@ -346,5 +324,5 @@ function getPokemonAbilities(array, index, abilityIndex) {
 }
 
 function getPokemonFavoriteState(array, index) {
-    return array[index]['favorite'] ? './assets/img/icons/favorite_saved.svg' : './assets/img/icons/favorite.svg';
+    return array[index]['favorite'] ? 'icons/favorit.png' : 'icons/nonfavorit.png';
 }
