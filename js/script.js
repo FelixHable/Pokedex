@@ -32,7 +32,7 @@ async function loadAllPokemonNamesAndUrl() {
         const responseJSON = await response.json();
         allPokemonNamesAndUrl = responseJSON.results || [];
     } catch (error) {
-        console.error(error);
+        console.error("Error loading all pokemon names and urls:", error);
     }
 }
 
@@ -46,7 +46,7 @@ async function loadPokemonPagination() {
         const responseJSON = await response.json();
         await getPokemonForPagination(responseJSON);
     } catch (error) {
-        console.error(error);
+        console.error("Error loading pokemon pagination:", error);
     } finally {
         hideLoadingScreen();
         pokemonLoading = false;
