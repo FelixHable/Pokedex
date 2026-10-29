@@ -25,7 +25,7 @@ function generatePokemonDetailsCardHTML(array, i) {
 
     return `
         <div class="pokemon-details-card" onclick="event.stopPropagation()">
-            <button id="next-pokemon-left-btn" class="nav-btn nav-btn-left btn" onclick="nextPokemonLeft(${getArrayNameAsString(array)}, ${i})" title="Previous Pokémon">
+            <button id="next-pokemon-left-btn" class="nav-btn nav-btn-left btn" onclick="navigatePokemon(${getArrayNameAsString(array)}, ${i}, -1)" title="Previous Pokémon">
                 <img src="icons/arrowleft.png" alt="Left">
             </button>
             <div class="pokemon-details-header" style="background: linear-gradient(135deg, ${typeColor}bb 0%, ${typeColor}ee 100%);">
@@ -93,7 +93,7 @@ function generatePokemonDetailsCardHTML(array, i) {
                     <span class="pokemon-properties ${getPokemonAbilities(array, i, 2)}">/ ${getPokemonAbilities(array, i, 2)}</span>
                 </div>
             </div>
-            <button id="next-pokemon-right-btn" class="nav-btn nav-btn-right btn" onclick="nextPokemonRight(${getArrayNameAsString(array)}, ${i})" title="Next Pokémon">
+            <button id="next-pokemon-right-btn" class="nav-btn nav-btn-right btn" onclick="navigatePokemon(${getArrayNameAsString(array)}, ${i}, 1)" title="Next Pokémon">
                 <img src="icons/arrowright.png" alt="Right">
             </button>
         </div>
