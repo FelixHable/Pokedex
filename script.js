@@ -24,7 +24,7 @@ async function loadAllPokemonNamesAndUrl() {
         const res = await fetch(`https://pokeapi.co/api/v2/pokemon/?limit=${numberOfAllPokemon}`);
         const data = await res.json();
         allPokemonNamesAndUrl = (data.results || []).filter(isValidMainPokemon);
-    } catch (e) { console.error(e); }
+    } catch (e) {console.error("Failed to load Pokémon list.", e);}
 }
 
 function isValidMainPokemon(p) {

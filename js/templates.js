@@ -16,38 +16,36 @@ const generatePokedexCardHTML = (array, i) => `
     </div>
 `;
 
-const generatePokemonDetailsCardHTML = (array, i) => {
-    const tc = getPokemonTypeHexColor(getPokemonType(array, i, 0)), arrStr = getArrayNameAsString(array), id = getPokemonID(array, i);
-    const isFirst = id === 1, isLast = id === 1025;
-    return `
-        <div class="pokemon-details-card" onclick="event.stopPropagation()">
-            <button id="next-pokemon-left-btn" class="nav-btn nav-btn-left btn ${isFirst ? 'disabled-nav-btn' : ''}" ${isFirst ? 'disabled' : `onclick="navigatePokemon(${arrStr}, ${i}, -1)"`} title="Previous Pokémon"><img src="icons/arrowleft.png" alt="Left"></button>
-            <div class="pokemon-details-header" style="background: linear-gradient(135deg, ${tc}bb 0%, ${tc}ee 100%);">
-                <button onclick="closePokemonDetails()" class="close-details-btn btn" title="Close"><img src="icons/close.png" alt="Close"></button>
-                <img src="${getPokemonImg(array, i)}" alt="${getPokemonName(array, i)}" class="pokemon-img pokemon-details-img">
-            </div>
-            <div class="pokemon-details-body">
-                <div class="pokemon-name-container">
-                    <span class="pokemon-name pokemon-details-name">${getPokemonName(array, i)}</span>
-                    <span class="pokemon-details-id">#${id}</span>
-                    <button class="favorite-btn btn" title="Favorite" onclick="setFavoritePokemon(${arrStr}, ${i}, ${id})"><img src="${getPokemonFavoriteState(array, i)}" alt="Fav" id="fav-icon-pokemon-index-${i}"></button>
-                </div>
-                ${generateStatsHTML(array, i)}
-            </div>
-            ${generateDetailsFooterHTML(array, i)}
-            <button id="next-pokemon-right-btn" class="nav-btn nav-btn-right btn ${isLast ? 'disabled-nav-btn' : ''}" ${isLast ? 'disabled' : `onclick="navigatePokemon(${arrStr}, ${i}, 1)"`} title="Next Pokémon"><img src="icons/arrowright.png" alt="Right"></button>
+const generatePokemonDetailsCardHTML = (array, i) => `
+    <div class="pokemon-details-card" onclick="event.stopPropagation()">
+        <button id="next-pokemon-left-btn" class="nav-btn nav-btn-left btn ${getPokemonID(array, i) === 1 ? 'disabled-nav-btn' : ''}" ${getPokemonID(array, i) === 1 ? 'disabled' : `onclick="navigatePokemon(${getArrayNameAsString(array)}, ${i}, -1)"`} title="Previous Pokémon"><img src="icons/arrowleft.png" alt="Left"></button>
+        <div class="pokemon-details-header" style="background: linear-gradient(135deg, ${getPokemonTypeHexColor(getPokemonType(array, i, 0))}bb 0%, ${getPokemonTypeHexColor(getPokemonType(array, i, 0))}ee 100%);">
+            <button onclick="closePokemonDetails()" class="close-details-btn btn" title="Close"><img src="icons/close.png" alt="Close"></button>
+            <img src="${getPokemonImg(array, i)}" alt="${getPokemonName(array, i)}" class="pokemon-img pokemon-details-img">
         </div>
-    `;
-};
+        <div class="pokemon-details-body">
+            <div class="pokemon-name-container">
+                <span class="pokemon-name pokemon-details-name">${getPokemonName(array, i)}</span>
+                <span class="pokemon-details-id">#${getPokemonID(array, i)}</span>
+                <button class="favorite-btn btn" title="Favorite" onclick="setFavoritePokemon(${getArrayNameAsString(array)}, ${i}, ${getPokemonID(array, i)})"><img src="${getPokemonFavoriteState(array, i)}" alt="Fav" id="fav-icon-pokemon-index-${i}"></button>
+            </div>
+            ${generateStatsHTML(array, i)}
+        </div>
+        ${generateDetailsFooterHTML(array, i)}
+        <button id="next-pokemon-right-btn" class="nav-btn nav-btn-right btn ${getPokemonID(array, i) === 1025 ? 'disabled-nav-btn' : ''}" ${getPokemonID(array, i) === 1025 ? 'disabled' : `onclick="navigatePokemon(${getArrayNameAsString(array)}, ${i}, 1)"`} title="Next Pokémon"><img src="icons/arrowright.png" alt="Right"></button>
+    </div>
+`;
 
-const generateStatsHTML = (array, i) => {
-    const stats = [{n: 'HP', c: 'hp'}, {n: 'ATK', c: 'atk'}, {n: 'DEF', c: 'def'}, {n: 'S-ATK', c: 's-atk'}, {n: 'S-DEF', c: 's-def'}, {n: 'SPEED', c: 'speed'}];
-    return `<div class="pokemon-stats">${stats.map((s, idx) => `
-        <div class="pokemon-stat">
-            <span class="pokemon-stat-description">${s.n}</span>
-            <div class="progress"><div class="progress-bar pokemon-stat-${s.c}" style="width: ${getPokemonStatPercent(array, i, idx)}%">${getPokemonStat(array, i, idx)}</div></div>
-        </div>`).join('')}</div>`;
-};
+const generateStatsHTML = (array, i) => `
+    <div class="pokemon-stats">
+        ${['HP', 'ATK', 'DEF', 'S-ATK', 'S-DEF', 'SPEED'].map((s, idx) => `
+            <div class="pokemon-stat">
+                <span class="pokemon-stat-description">${s}</span>
+                <div class="progress"><div class="progress-bar pokemon-stat-${['hp', 'atk', 'def', 's-atk', 's-def', 'speed'][idx]}" style="width: ${getPokemonStatPercent(array, i, idx)}%">${getPokemonStat(array, i, idx)}</div></div>
+            </div>
+        `).join('')}
+    </div>
+`;
 
 const generateDetailsFooterHTML = (array, i) => `
     <div class="pokemon-details-footer">
@@ -64,4 +62,9 @@ const generateDetailsFooterHTML = (array, i) => `
     </div>
 `;
 
-const generateEmptyHTML = () => `<div class="empty-container"><span class="empty-text">Oops...</span><span class="empty-text">No Pokémon found!</span></div>`;
+const generateEmptyHTML = () => `
+    <div class="empty-container">
+        <span class="empty-text">Oops...</span>
+        <span class="empty-text">No Pokémon found!</span>
+    </div>
+`;
