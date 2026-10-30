@@ -14,7 +14,6 @@ function init() {
 }
 
 function initEventListeners() {
-    window.addEventListener('scroll', handleWindowScroll);
     window.addEventListener('keydown', handleWindowKeydown);
     document.addEventListener('touchstart', handleTouchStart, false);
     document.addEventListener('touchmove', handleTouchMove, false);
@@ -210,12 +209,10 @@ function getArrayNameAsString(array) {
 }
 
 function capitalize(str) { return str ? str.toUpperCase() : ''; }
-function capitalizeFirstLetter(str) { return str ? str.replace(/(^|\/|-)(\S)/g, s => s.toUpperCase()) : ''; }
-function capitalizeAfterHyphen(str) { return str ? str.replace(/-([a-z])/g, (_, c) => '-' + c.toUpperCase()) : ''; }
 
-function handleWindowScroll() {
-    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 100 && !pokemonLoading) loadMorePokemon();
-}
+function capitalizeFirstLetter(str) { return str ? str.replace(/(^|\/|-)(\S)/g, s => s.toUpperCase()) : ''; }
+
+function capitalizeAfterHyphen(str) { return str ? str.replace(/-([a-z])/g, (_, c) => '-' + c.toUpperCase()) : ''; }
 
 function handleWindowKeydown(e) {
     if (e.key === 'Escape') closePokemonDetails();
@@ -235,17 +232,26 @@ function handleTouchMove(evt) {
 }
 
 function getPokemonProperties(array, index, prop) { return array[index][prop]; }
+
 function getPokemonID(array, index) { return array[index]['id']; }
+
 function getPokemonName(array, index) { return array[index]['name'].replace(/(^|\/|-)(\S)/g, s => s.toUpperCase()); }
+
 function getPokemonImg(array, index) { return array[index]['sprites']['other']['official-artwork']['front_default'] || 'icons/close.png'; }
+
 function getPokemonType(array, index, typeIndex) { return array[index]['types'][typeIndex] ? array[index]['types'][typeIndex]['type']['name'] : 'd-none'; }
+
 function getPokemonStat(array, index, stat) { return array[index]['stats'][stat]['base_stat']; }
+
 function getPokemonStatPercent(array, index, stat) { return (array[index]['stats'][stat]['base_stat'] / 255) * 100; }
+
 function getPokemonTypeHexColor(type) {
     const colors = { normal: '#a8a878', fighting: '#c03028', flying: '#a890f0', poison: '#a040a0', ground: '#e0c068', rock: '#b8a038', bug: '#a8b820', ghost: '#705898', steel: '#b8b8d0', fire: '#f08030', water: '#6890f0', grass: '#78c850', electric: '#f8d030', psychic: '#f85888', ice: '#98d8d8', dragon: '#7038f8', dark: '#705848', fairy: '#ee99ac' };
     return colors[type] || '#a8a878';
 }
+
 function getPokemonAbilities(array, index, abilityIndex) {
     return array[index]['abilities'][abilityIndex] ? array[index]['abilities'][abilityIndex]['ability']['name'].replace(/(^|\/|-)(\S)/g, s => s.toUpperCase()) : 'd-none';
 }
+
 function getPokemonFavoriteState(array, index) { return array[index]['favorite'] ? 'icons/favorit.png' : 'icons/nonfavorit.png'; }

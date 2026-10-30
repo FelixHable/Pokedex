@@ -461,6 +461,12 @@ nav {
 .nav-btn-left { left: 12px; }
 .nav-btn-right { right: 12px; }
 
+.nav-btn.disabled-nav-btn {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 .empty-container {
     grid-column: 1 / -1;
     display: flex;
